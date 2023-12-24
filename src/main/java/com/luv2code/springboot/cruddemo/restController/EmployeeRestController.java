@@ -1,6 +1,7 @@
 package com.luv2code.springboot.cruddemo.restController;
 
 import com.luv2code.springboot.cruddemo.entity.Employee;
+import com.luv2code.springboot.cruddemo.exceptionHandler.EmployeeNotFoundException;
 import com.luv2code.springboot.cruddemo.service.EmployeeService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +36,7 @@ public class EmployeeRestController {
 
         Employee theEmployee = employeeService.findById(id);
         if(theEmployee == null) {
-            throw new RuntimeException("Employee ID not found : " + id);
+            throw new EmployeeNotFoundException("Employee ID not found : " + id);
         }
         return theEmployee;
     }
@@ -65,7 +66,7 @@ public class EmployeeRestController {
 
         Employee dbEmployee = employeeService.findById(id);
         if(dbEmployee == null) {
-            throw new RuntimeException("Employee ID not found : " + id);
+            throw new EmployeeNotFoundException("Employee ID not found : " + id);
         }
         employeeService.deleteById(id);
 
